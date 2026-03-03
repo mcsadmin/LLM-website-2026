@@ -113,19 +113,20 @@
   var videoClose = document.getElementById('video-dialog-close');
   var videoPlayer = document.getElementById('video-player');
 
+  var videoSrc = videoPlayer ? videoPlayer.getAttribute('data-src') : '';
+
   function openVideoDialog() {
     videoDialog.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    if (videoPlayer) {
-      videoPlayer.currentTime = 0;
-      videoPlayer.play().catch(function() {});
+    if (videoPlayer && videoSrc) {
+      videoPlayer.src = videoSrc + '?autoplay=1';
     }
   }
 
   function closeVideoDialog() {
     videoDialog.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    if (videoPlayer) videoPlayer.pause();
+    if (videoPlayer) videoPlayer.src = '';
   }
 
   if (videoTrigger && videoDialog) {

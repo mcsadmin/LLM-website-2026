@@ -34,7 +34,7 @@ hero:
     url: "/#guide"
   videoCTA:
     text: "Watch Video"
-    videoSrc: "/videos/explainer.mp4"
+    videoSrc: "https://player.vimeo.com/video/1169860997"
   visual:
     centerValue: "£0"
     centerLabel: "Late payment fees"
@@ -286,10 +286,7 @@ footer:
     - href: "https://www.linkedin.com/company/localloop-merseyside/"
       icon: "linkedin"
       label: "LinkedIn"
-    - href: "https://wa.me/PLACEHOLDER"
-      icon: "whatsapp"
-      label: "WhatsApp"
-    - href: "mailto:hello@localloop.io"
+    - href: "mailto:hello@localloop-merseyside.co.uk"
       icon: "mail"
       label: "Email"
   navLinks:
@@ -304,7 +301,7 @@ footer:
     - href: "/contact/"
       label: "Contact"
   contact:
-    location: "Liverpool, Merseyside, UK"
-    email: "hello@localloop.io"
+    location: "c/c DoES Liverpool, 68-76 Kempston Street, L3 8HL"
+    email: "hello@localloop-merseyside.co.uk"
   copyright: "Local Loop. All rights reserved."
   tagline: "Liverpool, Merseyside"
