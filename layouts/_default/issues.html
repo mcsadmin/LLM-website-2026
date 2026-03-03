@@ -62,6 +62,11 @@
         </div>
 
         <div class="form-page__field">
+          <label class="form-page__label" for="issue-submitter">Submitted by (optional)</label>
+          <input class="form-page__input" type="text" id="issue-submitter" name="submitter" placeholder="Name or email">
+        </div>
+
+        <div class="form-page__field">
           <label class="form-page__label" for="issue-screenshot">Screenshot (optional, max 4MB)</label>
           <input class="form-page__input" type="file" id="issue-screenshot" name="screenshot" accept="image/*">
         </div>
@@ -136,9 +141,15 @@
     var concerning = document.getElementById('issue-concerning').value;
     if (concerning) issueLabels.push(concerning);
 
+    var desc = document.getElementById('issue-description').value.trim();
+    var submitter = document.getElementById('issue-submitter').value.trim();
+    if (submitter) {
+      desc = desc ? desc + '\n\n**Submitted by:** ' + submitter : '**Submitted by:** ' + submitter;
+    }
+
     var basePayload = {
       title: 'LLM website: ' + document.getElementById('issue-title').value.trim(),
-      description: document.getElementById('issue-description').value.trim(),
+      description: desc,
       priority: document.getElementById('issue-priority').value,
       labels: issueLabels
     };
