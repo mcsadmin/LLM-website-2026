@@ -96,10 +96,10 @@
     errorEl.hidden = true;
 
     var payload = {
-      title: document.getElementById('issue-title').value.trim(),
+      title: 'LLM website: ' + document.getElementById('issue-title').value.trim(),
       description: document.getElementById('issue-description').value.trim(),
       priority: document.getElementById('issue-priority').value,
-      label: '4f0cad12-f4a3-4ae4-a74d-c68e350b655b'
+      labels: ['4f0cad12-f4a3-4ae4-a74d-c68e350b655b', '7961aeab-dfbb-44f0-9d71-99f748d645d6']
     };
 
     fetch('/.netlify/functions/create-issue', {

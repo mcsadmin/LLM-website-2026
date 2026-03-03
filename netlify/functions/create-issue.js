@@ -18,6 +18,7 @@ exports.handler = async function(event) {
   var title = (data.title || '').trim();
   var description = (data.description || '').trim();
   var priority = parseInt(data.priority, 10) || 0;
+  var labels = data.labels || [];
   var label = (data.label || '').trim();
 
   if (!title) {
@@ -35,7 +36,8 @@ exports.handler = async function(event) {
     assigneeId: assigneeId
   };
   if (description) input.description = description;
-  if (label) input.labelIds = [label];
+  if (labels.length > 0) input.labelIds = labels;
+  else if (label) input.labelIds = [label];
 
   try {
     var res = await fetch('https://api.linear.app/graphql', {
