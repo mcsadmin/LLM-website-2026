@@ -25,12 +25,14 @@ exports.handler = async function(event) {
   }
 
   var teamId = 'a7276c5f-805f-4a67-a5e2-0228986892aa';
+  var assigneeId = '053ca95e-aa9c-46c3-bc1b-dff7beeb39b9';
 
   var mutation = 'mutation CreateIssue($input: IssueCreateInput!) { issueCreate(input: $input) { success issue { id identifier url } } }';
   var input = {
     teamId: teamId,
     title: title,
-    priority: priority
+    priority: priority,
+    assigneeId: assigneeId
   };
   if (description) input.description = description;
   if (label) input.labelIds = [label];
