@@ -49,18 +49,6 @@
           </select>
         </div>
 
-        <div class="form-page__field">
-          <label class="form-page__label" for="issue-label">Label</label>
-          <select class="form-page__input form-page__select" id="issue-label" name="label">
-            <option value="">None</option>
-            <option value="2d07217e-ae02-44b3-8da6-383c0f7d14b6">Tech</option>
-            <option value="4f0cad12-f4a3-4ae4-a74d-c68e350b655b">Marketing</option>
-            <option value="8b269745-fafc-4ee1-b0eb-af8e9d01bcb3">Operations</option>
-            <option value="9281600b-f8f2-4fd5-84e9-fd0467b6b450">Admin</option>
-            <option value="7961aeab-dfbb-44f0-9d71-99f748d645d6">LLM</option>
-          </select>
-        </div>
-
         <div class="form-page__actions">
           <button type="submit" class="btn btn--green btn--lg" id="issue-submit">
             Create Issue
@@ -111,7 +99,7 @@
       title: document.getElementById('issue-title').value.trim(),
       description: document.getElementById('issue-description').value.trim(),
       priority: document.getElementById('issue-priority').value,
-      label: document.getElementById('issue-label').value
+      label: '4f0cad12-f4a3-4ae4-a74d-c68e350b655b'
     };
 
     fetch('/.netlify/functions/create-issue', {
