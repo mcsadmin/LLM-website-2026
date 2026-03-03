@@ -50,6 +50,18 @@
         </div>
 
         <div class="form-page__field">
+          <label class="form-page__label" for="issue-concerning">Concerning...</label>
+          <select class="form-page__input form-page__select" id="issue-concerning" name="concerning">
+            <option value="">Not specified</option>
+            <option value="be153795-8530-4cfa-93fb-12c107df991d">Functional</option>
+            <option value="2d7d825c-a165-4210-a5d5-9a8f7166a4c1">Behaviour</option>
+            <option value="aa8a9355-96f1-4162-91cc-43bfcc5050d4">Screen layout</option>
+            <option value="0f198fdb-2aec-466e-bc2f-3356a72bfa26">Design/Layout</option>
+            <option value="f7602a9b-55cb-45b1-9238-58aec124f416">Text</option>
+          </select>
+        </div>
+
+        <div class="form-page__field">
           <label class="form-page__label" for="issue-screenshot">Screenshot (optional, max 4MB)</label>
           <input class="form-page__input" type="file" id="issue-screenshot" name="screenshot" accept="image/*">
         </div>
@@ -120,22 +132,23 @@
       return;
     }
 
+    var issueLabels = ['4f0cad12-f4a3-4ae4-a74d-c68e350b655b', '7961aeab-dfbb-44f0-9d71-99f748d645d6'];
+    var concerning = document.getElementById('issue-concerning').value;
+    if (concerning) issueLabels.push(concerning);
+
+    var basePayload = {
+      title: 'LLM website: ' + document.getElementById('issue-title').value.trim(),
+      description: document.getElementById('issue-description').value.trim(),
+      priority: document.getElementById('issue-priority').value,
+      labels: issueLabels
+    };
+
     var buildPayload = file
       ? readFileAsBase64(file).then(function(b64) {
-          return {
-            title: 'LLM website: ' + document.getElementById('issue-title').value.trim(),
-            description: document.getElementById('issue-description').value.trim(),
-            priority: document.getElementById('issue-priority').value,
-            labels: ['4f0cad12-f4a3-4ae4-a74d-c68e350b655b', '7961aeab-dfbb-44f0-9d71-99f748d645d6'],
-            screenshot: { data: b64, filename: file.name, contentType: file.type }
-          };
+          basePayload.screenshot = { data: b64, filename: file.name, contentType: file.type };
+          return basePayload;
         })
-      : Promise.resolve({
-          title: 'LLM website: ' + document.getElementById('issue-title').value.trim(),
-          description: document.getElementById('issue-description').value.trim(),
-          priority: document.getElementById('issue-priority').value,
-          labels: ['4f0cad12-f4a3-4ae4-a74d-c68e350b655b', '7961aeab-dfbb-44f0-9d71-99f748d645d6']
-        });
+      : Promise.resolve(basePayload);
 
     buildPayload.then(function(payload) {
       return fetch('/.netlify/functions/create-issue', {
