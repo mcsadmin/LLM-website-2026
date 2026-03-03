@@ -1,0 +1,102 @@
+{{ define "main" }}
+{{ $d := .Site.Data.content }}
+{{ $header := $d.header }}
+
+<header id="site-header" class="header header--join">
+  <div class="container-site">
+    <div class="header__inner">
+      <a href="/" class="header__logo">
+        <img src="{{ $header.logo }}" alt="Local Loop" class="header__logo-img">
+      </a>
+      <div class="header__cta-wrap">
+        <a href="/team-9k4mp7vr2wq8nlxj/" class="btn btn--back">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Form
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="join-page">
+  <div class="join-page__container">
+    <div class="join-page__header" data-animate="fade-up">
+      <h1 class="join-page__title">How to Submit an Issue</h1>
+    </div>
+
+    <div class="join-page__card howto-content" data-animate="fade-up" data-delay="150">
+
+      <p>This guide explains how to use the internal issue submission page to report bugs, request features, or flag anything that needs attention.</p>
+
+      <p>This page is hidden — it won't appear in the site navigation, search engines, or the sitemap. Bookmark it for easy access. If there are multiple issues, please submit them separately — this page allows you to submit as many as you need.</p>
+
+      <h2>Filling Out the Form</h2>
+
+      <h3>Issue Title <span class="howto-required">(required)</span></h3>
+      <p>A short summary of the issue. Keep it clear and specific.</p>
+      <ul>
+        <li><strong>Good:</strong> "Footer links broken on mobile"</li>
+        <li><strong>Avoid:</strong> "Something's wrong"</li>
+      </ul>
+
+      <h3>Description <span class="howto-optional">(optional)</span></h3>
+      <p>Add detail to help whoever picks this up. Include:</p>
+      <ul>
+        <li>What's happening vs what you expected</li>
+        <li>Steps to reproduce (if it's a bug)</li>
+        <li>Any relevant URLs</li>
+      </ul>
+
+      <h3>Priority</h3>
+      <p>Choose from the dropdown:</p>
+      <table class="howto-table">
+        <thead>
+          <tr><th>Priority</th><th>When to use</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>No priority</td><td>Not yet assessed</td></tr>
+          <tr><td>Low</td><td>Nice to have, no rush</td></tr>
+          <tr><td>Medium</td><td>Should be done soon (default)</td></tr>
+          <tr><td>High</td><td>Important, needs attention this week</td></tr>
+          <tr><td>Urgent</td><td>Blocking or time-sensitive</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Concerning... <span class="howto-optional">(optional)</span></h3>
+      <p>Tag the issue with the area it relates to:</p>
+      <ul>
+        <li><strong>Functional</strong> — A feature doesn't work</li>
+        <li><strong>Behaviour</strong> — The site behaves incorrectly</li>
+        <li><strong>Screen layout</strong> — Positioning or visibility issues</li>
+        <li><strong>Design/Layout</strong> — Needs to be better!</li>
+        <li><strong>Text</strong> — Typos, wording, or copy issues</li>
+      </ul>
+      <p>Leave as "Not specified" if unsure.</p>
+
+      <h3>Submitted by <span class="howto-optional">(optional)</span></h3>
+      <p>Enter your name or email address so the team knows who raised the issue.</p>
+
+      <h3>Screenshot <span class="howto-optional">(optional)</span></h3>
+      <p>Attach a screenshot to help illustrate the issue. The file must be under 4MB and can be any image format (PNG, JPG, etc.). The screenshot is uploaded and embedded in the issue description.</p>
+
+      <h2>What Happens Automatically</h2>
+      <p>Every issue submitted through this form is added to our issues board.</p>
+
+      <h2>Submitting</h2>
+      <p>Click <strong>Create Issue</strong>. You'll see a confirmation with the issue identifier (e.g. MCS-42). The issue is now in the Linear workspace and can be viewed, assigned, and tracked there.</p>
+      <p>Click <strong>Submit Another</strong> to create additional issues.</p>
+
+      <h2>Troubleshooting</h2>
+      <p>If the form doesn't seem to work:</p>
+      <ol>
+        <li>Check your internet connection</li>
+        <li>Try again using the <strong>Try Again</strong> button</li>
+        <li>If it persists, contact Dil at localloop-merseyside.co.uk</li>
+      </ol>
+
+    </div>
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ end }}

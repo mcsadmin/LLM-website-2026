@@ -1397,6 +1397,11 @@ h2, h3, h4, h5, h6 {
   border-color: hsl(var(--primary));
 }
 
+.form-page__input[type="file"] {
+  padding: 0.625rem;
+  cursor: pointer;
+}
+
 .form-page__input::placeholder {
   color: hsl(var(--muted-foreground));
 }
@@ -1485,4 +1490,55 @@ h2, h3, h4, h5, h6 {
   }
   [data-animate] { opacity: 1; transform: none; }
   .marquee__track { animation: none; }
+}
+
+.form-page__help-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  font-weight: 600;
+}
+.form-page__help-link:hover {
+  color: hsl(var(--accent));
+}
+
+.howto-content h2 {
+  font-family: 'Arvo', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(var(--primary));
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.howto-content h2:first-child { margin-top: 0; }
+.howto-content h3 {
+  font-family: 'Arvo', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.howto-content p { margin-bottom: 0.75rem; line-height: 1.6; }
+.howto-content ul, .howto-content ol {
+  margin: 0 0 1rem 1.5rem;
+  line-height: 1.6;
+}
+.howto-content li { margin-bottom: 0.25rem; }
+.howto-required { color: hsl(0 70% 50%); font-size: 0.85em; }
+.howto-optional { color: hsl(var(--muted-foreground)); font-size: 0.85em; }
+.howto-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0 1.25rem;
+  font-size: 0.9rem;
+}
+.howto-table th, .howto-table td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid hsl(0 0% 90%);
+}
+.howto-table th {
+  font-weight: 600;
+  color: hsl(var(--primary));
 }
