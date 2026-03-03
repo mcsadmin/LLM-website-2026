@@ -1,6 +1,6 @@
 header:
   logo: "/images/logo-purple-merseyside.svg"
-  platformURL: "https://demo.localloop-merseyside.co.uk"
+  platformURL: "https://app.localloop-merseyside.co.uk/"
   ctaText: "Join Local Loop"
   nav:
     - href: "/#hero"
@@ -178,7 +178,7 @@ lead_magnet:
 
 join:
   heading: "Join Local Loop"
-  platformURL: "https://demo.localloop-merseyside.co.uk/signup"
+  platformURL: "https://app.localloop-merseyside.co.uk/"
   newsletterAction: "https://mailygo-production.up.railway.app/"
   welcome:
     text: "To validate your business for membership of the Local Loop Clearing Club, we just need to check a few things. A short sequence of questions with yes-no answers will very quickly get you to a result."
