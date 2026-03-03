@@ -4,7 +4,7 @@ This guide explains how to use the internal issue submission page to report bugs
 
 ## Accessing the Page
 
-Go to: `/team-9k4mp7vr2wq8nlxj/`
+Go to: `https://localloop-merseyside.co.uk/team-9k4mp7vr2wq8nlxj/`
 
 This page is hidden — it won't appear in the site navigation, search engines, or the sitemap. Bookmark it for easy access.
 
