@@ -1,6 +1,19 @@
 (function() {
   'use strict';
 
+  // Footer email obfuscation
+  (function() {
+    var u = 'hello';
+    var d = 'localloop-merseyside.co.uk';
+    var addr = u + '@' + d;
+    var link = document.getElementById('footer-email-link');
+    var text = document.getElementById('footer-email-text');
+    var social = document.getElementById('footer-social-email');
+    if (link) { link.href = 'mailto:' + addr; }
+    if (text) { text.textContent = addr; }
+    if (social) { social.href = 'mailto:' + addr; }
+  })();
+
   // Header scroll effect
   var header = document.getElementById('site-header');
   if (header) {
