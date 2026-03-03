@@ -553,6 +553,7 @@ h2, h3, h4, h5, h6 {
 }
 
 .section__cta { text-align: center; margin-top: 3rem; }
+.section__footnote { font-size: 0.8rem; color: hsla(0, 0%, 100%, 0.6); text-align: center; margin-top: 2rem; font-style: italic; }
 
 /* ===== CARDS ===== */
 .card-grid {
