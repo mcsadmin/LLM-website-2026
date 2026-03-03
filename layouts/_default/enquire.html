@@ -1,0 +1,86 @@
+{{ define "main" }}
+{{ $d := .Site.Data.content }}
+{{ $pg := $d.enquire }}
+{{ $header := $d.header }}
+
+<header id="site-header" class="header header--join">
+  <div class="container-site">
+    <div class="header__inner">
+      <a href="/" class="header__logo">
+        <img src="{{ $header.logo }}" alt="Local Loop" class="header__logo-img">
+      </a>
+      <div class="header__cta-wrap">
+        <a href="/" class="btn btn--back">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="join-page">
+  <div class="join-page__container">
+    <div class="join-page__header" data-animate="fade-up">
+      <h1 class="join-page__title">{{ $pg.heading }}</h1>
+    </div>
+
+    <div class="join-page__card" data-animate="fade-up" data-delay="150">
+      <p class="form-page__description">{{ $pg.description }}</p>
+
+      <div class="form-page__details">
+        <h3 class="form-page__details-heading">{{ $pg.whatWeAsk.heading }}</h3>
+        <ul class="form-page__details-list">
+          {{ range $pg.whatWeAsk.items }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+
+        <h3 class="form-page__details-heading">{{ $pg.whatYouGet.heading }}</h3>
+        <ul class="form-page__details-list">
+          {{ range $pg.whatYouGet.items }}
+          <li>{{ . }}</li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <form class="form-page__form" action="{{ $pg.formAction }}" method="POST" data-form="enquire">
+        <input type="text" name="_t_email" class="join-newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_formName" value="founding-membership-enquiry">
+        <input type="hidden" name="_replyTo" value="">
+        <input type="hidden" name="timestamp" value="">
+
+        {{ range $pg.fields }}
+        <div class="form-page__field">
+          <label class="form-page__label" for="field-{{ .name }}">{{ .label }}</label>
+          {{ if eq .type "textarea" }}
+          <textarea class="form-page__input form-page__textarea" id="field-{{ .name }}" name="{{ .name }}" placeholder="{{ .placeholder }}" {{ if .required }}required{{ end }} rows="5"></textarea>
+          {{ else }}
+          <input class="form-page__input" type="{{ .type }}" id="field-{{ .name }}" name="{{ .name }}" placeholder="{{ .placeholder }}" {{ if .required }}required{{ end }}>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        <div class="form-page__actions">
+          <button type="submit" class="btn btn--green btn--lg">
+            {{ $pg.ctaText }}
+            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="form-page__success" hidden>
+        <div class="join-result__icon join-result__icon--good">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <p class="join-screen__text">{{ $pg.successMessage }}</p>
+        <div class="join-screen__actions">
+          <a href="/" class="btn btn--outline-pill btn--sm">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ end }}

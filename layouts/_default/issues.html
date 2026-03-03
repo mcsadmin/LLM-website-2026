@@ -1,0 +1,162 @@
+{{ define "main" }}
+{{ $d := .Site.Data.content }}
+{{ $header := $d.header }}
+
+<header id="site-header" class="header header--join">
+  <div class="container-site">
+    <div class="header__inner">
+      <a href="/" class="header__logo">
+        <img src="{{ $header.logo }}" alt="Local Loop" class="header__logo-img">
+      </a>
+      <div class="header__cta-wrap">
+        <a href="/" class="btn btn--back">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="join-page">
+  <div class="join-page__container">
+    <div class="join-page__header" data-animate="fade-up">
+      <h1 class="join-page__title">Submit an Issue</h1>
+    </div>
+
+    <div class="join-page__card" data-animate="fade-up" data-delay="150">
+      <p class="form-page__description">Report a bug, request a feature, or flag something that needs attention on the website.</p>
+
+      <form class="form-page__form" id="issue-form">
+        <div class="form-page__field">
+          <label class="form-page__label" for="issue-title">Issue Title</label>
+          <input class="form-page__input" type="text" id="issue-title" name="title" placeholder="Brief summary of the issue" required>
+        </div>
+
+        <div class="form-page__field">
+          <label class="form-page__label" for="issue-description">Description</label>
+          <textarea class="form-page__input form-page__textarea" id="issue-description" name="description" placeholder="Describe the issue in detail — what's wrong, what you expected, steps to reproduce" rows="6"></textarea>
+        </div>
+
+        <div class="form-page__field">
+          <label class="form-page__label" for="issue-priority">Priority</label>
+          <select class="form-page__input form-page__select" id="issue-priority" name="priority">
+            <option value="0">No priority</option>
+            <option value="4">Low</option>
+            <option value="3" selected>Medium</option>
+            <option value="2">High</option>
+            <option value="1">Urgent</option>
+          </select>
+        </div>
+
+        <div class="form-page__field">
+          <label class="form-page__label" for="issue-label">Label</label>
+          <select class="form-page__input form-page__select" id="issue-label" name="label">
+            <option value="">None</option>
+            <option value="2d07217e-ae02-44b3-8da6-383c0f7d14b6">Tech</option>
+            <option value="4f0cad12-f4a3-4ae4-a74d-c68e350b655b">Marketing</option>
+            <option value="8b269745-fafc-4ee1-b0eb-af8e9d01bcb3">Operations</option>
+            <option value="9281600b-f8f2-4fd5-84e9-fd0467b6b450">Admin</option>
+            <option value="7961aeab-dfbb-44f0-9d71-99f748d645d6">LLM</option>
+          </select>
+        </div>
+
+        <div class="form-page__actions">
+          <button type="submit" class="btn btn--green btn--lg" id="issue-submit">
+            Create Issue
+            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="form-page__success" id="issue-success" hidden>
+        <div class="join-result__icon join-result__icon--good">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <p class="join-screen__text" id="issue-success-msg"></p>
+        <div class="join-screen__actions">
+          <button class="btn btn--green btn--sm" id="issue-another">Submit Another</button>
+        </div>
+      </div>
+
+      <div class="form-page__error" id="issue-error" hidden>
+        <div class="join-result__icon join-result__icon--neutral">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+        </div>
+        <p class="join-screen__text" id="issue-error-msg">Something went wrong. Please try again.</p>
+        <div class="join-screen__actions">
+          <button class="btn btn--outline-pill btn--sm" id="issue-retry">Try Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function() {
+  var form = document.getElementById('issue-form');
+  var successEl = document.getElementById('issue-success');
+  var successMsg = document.getElementById('issue-success-msg');
+  var errorEl = document.getElementById('issue-error');
+  var errorMsg = document.getElementById('issue-error-msg');
+  var submitBtn = document.getElementById('issue-submit');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating\u2026';
+    errorEl.hidden = true;
+
+    var payload = {
+      title: document.getElementById('issue-title').value.trim(),
+      description: document.getElementById('issue-description').value.trim(),
+      priority: document.getElementById('issue-priority').value,
+      label: document.getElementById('issue-label').value
+    };
+
+    fetch('/.netlify/functions/create-issue', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+    .then(function(result) {
+      if (result.ok && result.data.success) {
+        form.style.display = 'none';
+        var desc = form.parentElement.querySelector('.form-page__description');
+        if (desc) desc.style.display = 'none';
+        successMsg.textContent = 'Issue ' + result.data.identifier + ' created successfully.';
+        successEl.hidden = false;
+      } else {
+        errorMsg.textContent = result.data.error || 'Something went wrong. Please try again.';
+        errorEl.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Issue';
+      }
+    })
+    .catch(function() {
+      errorMsg.textContent = 'Network error. Please check your connection and try again.';
+      errorEl.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Create Issue';
+    });
+  });
+
+  document.getElementById('issue-another').addEventListener('click', function() {
+    form.reset();
+    form.style.display = '';
+    var desc = form.parentElement.querySelector('.form-page__description');
+    if (desc) desc.style.display = '';
+    successEl.hidden = true;
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Create Issue <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+  });
+
+  document.getElementById('issue-retry').addEventListener('click', function() {
+    errorEl.hidden = true;
+  });
+})();
+</script>
+
+{{ partial "footer.html" . }}
+{{ end }}

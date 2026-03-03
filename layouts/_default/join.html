@@ -1,0 +1,150 @@
+{{ define "main" }}
+{{ $d := .Site.Data.content }}
+{{ $join := $d.join }}
+{{ $header := $d.header }}
+
+<header id="site-header" class="header header--join">
+  <div class="container-site">
+    <div class="header__inner">
+      <a href="/" class="header__logo">
+        <img src="{{ $header.logo }}" alt="Local Loop" class="header__logo-img">
+      </a>
+      <div class="header__cta-wrap">
+        <a href="/" class="btn btn--back">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="join-page">
+  <div class="join-page__container">
+    <div class="join-page__header" data-animate="fade-up">
+      <h1 class="join-page__title">{{ $join.heading }}</h1>
+    </div>
+
+    <div class="join-page__card" data-animate="fade-up" data-delay="150" aria-live="polite" data-mailygo-action="{{ $join.newsletterAction }}">
+
+      <div class="join-screen join-screen--active" data-screen="welcome">
+        <p class="join-screen__text">{{ $join.welcome.text }}</p>
+        <div class="join-screen__actions">
+          <button class="btn btn--green btn--lg" id="join-begin">
+            {{ $join.welcome.ctaText }}
+            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="inArea">
+        <div class="join-screen__step">
+          <div class="join-question__number">1</div>
+        </div>
+        <h2 class="join-screen__question">{{ $join.inArea.question }}</h2>
+        <div class="join-yesno">
+          <button class="btn btn--option" data-answer="yes">Yes</button>
+          <button class="btn btn--option" data-answer="no">No</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="buying">
+        <div class="join-screen__step">
+          <div class="join-question__number">2</div>
+        </div>
+        <h2 class="join-screen__question">{{ $join.buying.question }}</h2>
+        <p class="join-screen__subtext">{{ $join.buying.subtext }}</p>
+        <div class="join-yesno">
+          <button class="btn btn--option" data-answer="yes">Yes</button>
+          <button class="btn btn--option" data-answer="no">No</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="selling">
+        <div class="join-screen__step">
+          <div class="join-question__number">3</div>
+        </div>
+        <h2 class="join-screen__question">{{ $join.selling.question }}</h2>
+        <p class="join-screen__subtext">{{ $join.selling.subtext }}</p>
+        <div class="join-yesno">
+          <button class="btn btn--option" data-answer="yes">Yes</button>
+          <button class="btn btn--option" data-answer="no">No</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="stage2">
+        <p class="join-screen__text">{{ $join.stage2.text }}</p>
+        <div class="join-yesno">
+          <button class="btn btn--option" data-answer="yes">Yes</button>
+          <button class="btn btn--option" data-answer="no">No</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="wonderful">
+        <div class="join-result__icon join-result__icon--good">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <p class="join-screen__text">{{ $join.wonderful.text }}</p>
+        <div class="join-screen__actions">
+          <a href="{{ $join.platformURL }}" target="_blank" rel="noopener noreferrer" class="btn btn--green btn--lg">
+            {{ $join.wonderful.ctaText }}
+            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="join-screen__restart">
+          <button class="btn btn--outline-pill btn--sm" data-restart>Start Over</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="outOfArea">
+        <div class="join-result__icon join-result__icon--neutral">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <p class="join-screen__text">{{ $join.outOfArea.text }}</p>
+        <form class="join-newsletter" action="{{ $join.newsletterAction }}" method="POST">
+          <input type="text" name="_t_email" class="join-newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_formName" value="join-out-of-area">
+          <input type="hidden" name="source" value="out-of-area">
+          <div class="join-newsletter__field">
+            <input type="email" name="email" placeholder="{{ $join.newsletter.placeholder }}" required class="join-newsletter__input">
+            <input type="hidden" name="_replyTo" value="">
+            <button type="submit" class="btn btn--green">{{ $join.newsletter.ctaText }}</button>
+          </div>
+        </form>
+        <div class="join-newsletter__success" hidden>
+          <p class="join-screen__text join-screen__text--success">{{ $join.newsletter.successMessage }}</p>
+        </div>
+        <div class="join-screen__restart">
+          <button class="btn btn--outline-pill btn--sm" data-restart>Start Over</button>
+        </div>
+      </div>
+
+      <div class="join-screen" data-screen="additionalQs">
+        <div class="join-result__icon join-result__icon--neutral">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <p class="join-screen__text">{{ $join.additionalQs.text }}</p>
+        <form class="join-newsletter" action="{{ $join.newsletterAction }}" method="POST">
+          <input type="text" name="_t_email" class="join-newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_formName" value="join-not-a-fit">
+          <input type="hidden" name="source" value="not-a-fit">
+          <div class="join-newsletter__field">
+            <input type="email" name="email" placeholder="{{ $join.newsletter.placeholder }}" required class="join-newsletter__input">
+            <input type="hidden" name="_replyTo" value="">
+            <button type="submit" class="btn btn--green">{{ $join.newsletter.ctaText }}</button>
+          </div>
+        </form>
+        <div class="join-newsletter__success" hidden>
+          <p class="join-screen__text join-screen__text--success">{{ $join.newsletter.successMessage }}</p>
+        </div>
+        <div class="join-screen__restart">
+          <button class="btn btn--outline-pill btn--sm" data-restart>Start Over</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+{{ partial "footer.html" . }}
+{{ end }}

@@ -1,0 +1,42 @@
+{{ $d := .Site.Data.content.lead_magnet }}
+<section id="guide" class="section section--light">
+  <div class="container-site">
+    <div class="lead-magnet" data-animate="fade-up">
+      <div class="lead-magnet__icon">
+        <svg class="icon icon--lg icon--primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      </div>
+
+      <h2 class="lead-magnet__heading">{{ $d.heading }}</h2>
+      <p class="lead-magnet__subheading-italic">{{ $d.subheadingItalic }}</p>
+      <p class="lead-magnet__description">{{ $d.description }}</p>
+
+      <form class="lead-magnet__form" id="lead-form" action="https://mailygo-production.up.railway.app/" method="POST" novalidate>
+        <input type="text" name="_t_email" style="position:absolute;left:-9999px;top:-9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_formName" value="homepage-newsletter">
+        <div class="lead-magnet__form-row">
+          <input
+            type="email"
+            name="email"
+            placeholder="{{ $d.formPlaceholder }}"
+            required
+            class="lead-magnet__input"
+            id="lead-email"
+            autocomplete="email"
+          >
+          <input type="hidden" name="_replyTo" value="">
+          <button type="submit" class="btn btn--hero btn--lg btn--rounded" id="lead-submit">
+            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            {{ $d.formButtonText }}
+          </button>
+        </div>
+      </form>
+
+      <div class="lead-magnet__success" id="lead-success" hidden>
+        <svg class="icon icon--primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+        <p class="lead-magnet__success-text">{{ $d.successMessage }}</p>
+      </div>
+
+      <p class="lead-magnet__privacy">{{ $d.privacyText }}</p>
+    </div>
+  </div>
+</section>

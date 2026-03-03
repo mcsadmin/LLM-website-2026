@@ -1,0 +1,40 @@
+{{ $d := .Site.Data.content.header }}
+<header id="site-header" class="header">
+  <div class="container-site">
+    <div class="header__inner">
+      <a href="/#hero" class="header__logo" data-anchor>
+        <img src="{{ $d.logo }}" alt="Local Loop" class="header__logo-img">
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        {{ range $d.nav }}
+        <a href="{{ .href }}" class="header__nav-link" data-anchor>{{ .label }}</a>
+        {{ end }}
+      </nav>
+
+      <div class="header__cta-wrap">
+        <a href="/join/" class="btn btn--hero">
+          {{ $d.ctaText }}
+          <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <button class="header__menu-btn" aria-label="Toggle menu" aria-expanded="false" id="mobile-menu-btn">
+        <svg class="icon icon--menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        <svg class="icon icon--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="container-site mobile-menu__inner">
+      <a href="/join/" class="btn btn--hero btn--full">
+        {{ $d.ctaText }}
+        <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      {{ range $d.nav }}
+      <a href="{{ .href }}" class="mobile-menu__link" data-anchor>{{ .label }}</a>
+      {{ end }}
+    </div>
+  </div>
+</header>

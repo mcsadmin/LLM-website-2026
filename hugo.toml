@@ -1,0 +1,25 @@
+baseURL = "https://localloop-merseyside.co.uk/"
+languageCode = "en-gb"
+title = "Local Loop | Get Paid On Time"
+
+[taxonomies]
+
+[params]
+  description = "Local Loop is a trusted payment network for SMEs across Merseyside. Join a community of businesses committed to fair payment practices."
+  author = "Local Loop"
+  platformURL = "https://demo.localloop-merseyside.co.uk"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[build]
+  writeStats = true

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <title>{{ .Title | default .Site.Title }}</title>
+  <meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+
+  <meta property="og:title" content="{{ .Title | default .Site.Title }}">
+  <meta property="og:description" content="{{ .Params.description | default .Site.Params.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ .Site.BaseURL }}images/logo-purple-merseyside.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title | default .Site.Title }}">
+  <meta name="twitter:description" content="{{ .Params.description | default .Site.Params.description }}">
+  <meta name="twitter:image" content="{{ .Site.BaseURL }}images/logo-purple-merseyside.png">
+
+  {{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{ hugo.Generator }}
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <script defer src="https://plausible.io/js/pa-A30TAljspBqVAOHQwJPSc.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init();</script>
+</head>
+<body class="antialiased">
+  {{ block "main" . }}{{ end }}
+  <script src="/js/main.js" defer></script>
+</body>
+</html>

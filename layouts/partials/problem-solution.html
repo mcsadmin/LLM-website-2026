@@ -1,0 +1,44 @@
+{{ $d := .Site.Data.content.problem_solution }}
+<section id="problem" class="section section--muted">
+  <div class="container-site">
+    <div class="section__header" data-animate="fade-up">
+      <h2 class="section__title">{{ $d.problemHeading }}</h2>
+      <p class="section__subtitle">{{ $d.problemSubheading }}</p>
+    </div>
+
+    <div class="card-grid card-grid--3">
+      {{ range $i, $p := $d.problems }}
+      <div class="card card--problem" data-animate="fade-up" data-delay="{{ mul $i 100 }}">
+        <div class="card__icon card__icon--destructive">
+          {{ partial "icons/icon.html" (dict "name" $p.icon) }}
+        </div>
+        <h3 class="card__title">{{ $p.title }}</h3>
+        <p class="card__text">{{ $p.description }}</p>
+      </div>
+      {{ end }}
+    </div>
+
+    <hr class="section__hr">
+
+    <div class="section__header" data-animate="fade-up">
+      <h2 class="section__title">
+        {{ $d.solutionHeading }} <span class="text-gradient-primary">{{ $d.solutionHeadingHighlight }}</span> {{ $d.solutionHeadingEnd }}
+      </h2>
+      <p class="section__subtitle">{{ $d.solutionSubheading }}</p>
+      {{ with $d.solutionStrapline }}<p class="section__strapline">{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="card-grid card-grid--3">
+      {{ range $i, $s := $d.solutions }}
+      <div class="card card--solution" data-animate="fade-up" data-delay="{{ mul $i 100 }}">
+        <div class="card__icon card__icon--brand">
+          {{ partial "icons/icon.html" (dict "name" $s.icon) }}
+        </div>
+        <h3 class="card__title">{{ $s.title }}</h3>
+        {{ with $s.subtitle }}<p class="card__subtitle">{{ . }}</p>{{ end }}
+        <p class="card__text">{{ $s.description }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+{{ $d := .Site.Data.content.founding_members }}
+<section id="founding-members" class="section section--hero-bg">
+  <div class="container-site">
+    <div class="section__header section__header--light" data-animate="fade-up">
+      <h2 class="section__title">{{ $d.heading }}</h2>
+      <p class="section__subtitle section__subtitle--light">{{ $d.subheading }}</p>
+    </div>
+
+    <div class="marquee" data-animate="fade-in">
+      <div class="marquee__track">
+        {{ range $d.members }}
+        <div class="member-card">
+          {{ if .url }}
+          <a href="{{ .url }}" target="_blank" rel="noopener" class="member-card__link" title="Visit {{ .name }}">
+          {{ end }}
+            {{ if .logo }}
+            <div class="member-card__logo">
+              <img src="{{ .logo }}" alt="{{ .name }}" class="member-card__logo-img">
+            </div>
+            {{ else }}
+            <div class="member-card__icon">
+              <svg class="icon icon--accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+            </div>
+            {{ end }}
+            <h3 class="member-card__name">{{ .name }}</h3>
+          {{ if .url }}
+          </a>
+          {{ end }}
+          <p class="member-card__industry">{{ .industry }}</p>
+          <div class="member-card__badges">
+            {{ if or (eq .type "founder") (eq .type "both") }}
+            <img src="/images/badges/badge-founding-member.svg" alt="Founding Member" class="member-card__badge-img">
+            {{ end }}
+            {{ if or (eq .type "partner") (eq .type "both") }}
+            <img src="/images/badges/badge-partner.svg" alt="Partner" class="member-card__badge-img">
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+        {{ range $d.members }}
+        <div class="member-card">
+          {{ if .url }}
+          <a href="{{ .url }}" target="_blank" rel="noopener" class="member-card__link" title="Visit {{ .name }}">
+          {{ end }}
+            {{ if .logo }}
+            <div class="member-card__logo">
+              <img src="{{ .logo }}" alt="{{ .name }}" class="member-card__logo-img">
+            </div>
+            {{ else }}
+            <div class="member-card__icon">
+              <svg class="icon icon--accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+            </div>
+            {{ end }}
+            <h3 class="member-card__name">{{ .name }}</h3>
+          {{ if .url }}
+          </a>
+          {{ end }}
+          <p class="member-card__industry">{{ .industry }}</p>
+          <div class="member-card__badges">
+            {{ if or (eq .type "founder") (eq .type "both") }}
+            <img src="/images/badges/badge-founding-member.svg" alt="Founding Member" class="member-card__badge-img">
+            {{ end }}
+            {{ if or (eq .type "partner") (eq .type "both") }}
+            <img src="/images/badges/badge-partner.svg" alt="Partner" class="member-card__badge-img">
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="section__cta section__cta--with-toggle" data-animate="fade-up">
+      <button class="marquee__toggle" id="marquee-toggle" aria-label="Pause carousel" title="Pause carousel">
+        <svg class="marquee__icon marquee__icon--pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg class="marquee__icon marquee__icon--play" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="6,4 20,12 6,20"/></svg>
+      </button>
+      <span class="section__cta-spacer"></span>
+      <a href="{{ $d.ctaURL }}" class="btn btn--lime btn--lg">
+        {{ $d.ctaText }}
+        <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <span class="section__cta-spacer"></span>
+    </div>
+  </div>
+</section>
