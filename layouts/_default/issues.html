@@ -127,6 +127,7 @@
         if (desc) desc.style.display = 'none';
         successMsg.textContent = 'Issue ' + result.data.identifier + ' created successfully.';
         successEl.hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         errorMsg.textContent = result.data.error || 'Something went wrong. Please try again.';
         errorEl.hidden = false;
