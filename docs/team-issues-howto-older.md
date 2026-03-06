@@ -45,7 +45,7 @@ Click **Submit Another** to create additional issues.
 
 ## Troubleshooting
 
-If you see an error:
+If the form doesn't seem to work:
 1. Check your internet connection
 2. Try again using the **Try Again** button
 3. If it persists, contact dil@localloop-merseyside.co.uk

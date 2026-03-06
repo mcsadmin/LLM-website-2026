@@ -379,6 +379,8 @@
         if (!email || !email.includes('@')) return;
         var replyTo = this.querySelector('[name="_replyTo"]');
         if (replyTo) replyTo.value = email;
+        var subEmail = this.querySelector('[name="subscriberEmail"]');
+        if (subEmail) subEmail.value = email;
         var params = new URLSearchParams(new FormData(this));
         params.append('timestamp', new Date().toISOString());
         fetch(this.action, { method: 'POST', body: params }).catch(function() {});
