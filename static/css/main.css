@@ -215,9 +215,9 @@ h2, h3, h4, h5, h6 {
 @media (min-width: 1024px) { .header__cta-wrap { display: flex; } }
 
 .btn--signin {
-  border: 1.5px solid hsl(var(--primary) / 0.4);
+  border: 1.5px solid rgba(71, 15, 138, 0.4);
   background: #ffffff;
-  color: hsl(var(--primary));
+  color: #470f8a;
   border-radius: 9999px;
   height: 2rem;
   padding: 0 1.5rem;
@@ -226,8 +226,8 @@ h2, h3, h4, h5, h6 {
   transition: background 0.2s, border-color 0.2s;
 }
 .btn--signin:hover {
-  background: hsl(var(--primary) / 0.08);
-  border-color: hsl(var(--primary) / 0.7);
+  background: rgba(71, 15, 138, 0.08);
+  border-color: rgba(71, 15, 138, 0.7);
 }
 
 .hero__signin {
