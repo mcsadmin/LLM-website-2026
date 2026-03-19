@@ -216,7 +216,7 @@ h2, h3, h4, h5, h6 {
 
 .btn--signin {
   border: 1.5px solid hsl(var(--primary) / 0.4);
-  background: hsl(var(--background));
+  background: #ffffff;
   color: hsl(var(--primary));
   border-radius: 9999px;
   height: 2rem;
