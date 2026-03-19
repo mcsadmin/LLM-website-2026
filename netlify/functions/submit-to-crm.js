@@ -25,11 +25,13 @@ exports.handler = async function(event) {
     return { statusCode: 400, headers: headers, body: JSON.stringify({ error: 'Valid email required' }) };
   }
 
+  var name = email.split('@')[0];
+
   try {
-    var response = await fetch('https://mcs-odoo.odoo.com/web/hook/17b58f8d-8513-4e40-ab0c-ff820626a810', {
+    var response = await fetch('https://mcs-odoo.odoo.com/web/hook/b36a8701-fd50-467f-b27d-235e9dc20cfa', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email })
+      body: JSON.stringify({ email: email, name: name })
     });
 
     return {
