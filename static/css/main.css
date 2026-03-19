@@ -215,7 +215,7 @@ h2, h3, h4, h5, h6 {
 @media (min-width: 1024px) { .header__cta-wrap { display: flex; } }
 
 .btn--signin {
-  border: 1.5px solid rgba(71, 15, 138, 0.4);
+  border: 1.5px solid #ff9f0f;
   background: #ffffff;
   color: #470f8a;
   border-radius: 9999px;
@@ -227,7 +227,7 @@ h2, h3, h4, h5, h6 {
 }
 .btn--signin:hover {
   background: rgba(71, 15, 138, 0.08);
-  border-color: rgba(71, 15, 138, 0.7);
+  border-color: #ff9f0f;
 }
 
 .hero__signin {
