@@ -454,7 +454,7 @@
       // Send to MailyGo and Odoo in parallel
       Promise.allSettled([
         fetch(this.action, { method: 'POST', body: params }),
-        fetch('https://mcs-odoo.odoo.com/web/hook/17b58f8d-8513-4e40-ab0c-ff820626a810', {
+        fetch('/.netlify/functions/submit-to-crm', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email })
