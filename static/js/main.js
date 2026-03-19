@@ -431,6 +431,42 @@
     });
   });
 
+  // Lead magnet form — MailyGo + Odoo CRM webhook
+  var leadForm = document.getElementById('lead-form');
+  if (leadForm) {
+    leadForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var honeypot = this.querySelector('[name="_t_email"]');
+      if (honeypot && honeypot.value) return;
+      var emailInput = this.querySelector('[name="email"]');
+      var email = emailInput ? emailInput.value.trim() : '';
+      if (!email || !email.includes('@')) return;
+
+      var replyTo = this.querySelector('[name="_replyTo"]');
+      if (replyTo) replyTo.value = email;
+
+      var submitBtn = this.querySelector('[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; }
+
+      var params = new URLSearchParams(new FormData(this));
+      params.append('timestamp', new Date().toISOString());
+
+      // Send to MailyGo and Odoo in parallel
+      Promise.allSettled([
+        fetch(this.action, { method: 'POST', body: params }),
+        fetch('https://mcs-odoo.odoo.com/web/hook/17b58f8d-8513-4e40-ab0c-ff820626a810', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        })
+      ]).then(function() {
+        leadForm.style.display = 'none';
+        var success = document.getElementById('lead-success');
+        if (success) success.hidden = false;
+      });
+    });
+  }
+
   // Footer year
   var yearEl = document.getElementById('footer-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
