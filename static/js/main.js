@@ -161,7 +161,7 @@
     leadForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      var honeypot = this.querySelector('[name="_t_email"]');
+      var honeypot = this.querySelector('[name="_hp"]');
       if (honeypot && honeypot.value) return;
 
       var emailInput = document.getElementById('lead-email');
@@ -173,7 +173,7 @@
 
       var params = new URLSearchParams(new FormData(this));
       params.append('timestamp', new Date().toISOString());
-      fetch(this.action, { method: 'POST', body: params }).catch(function() {});
+      fetch(this.action, { method: 'POST', body: params, redirect: 'manual' }).catch(function() {});
 
       leadForm.style.display = 'none';
       leadSuccess.hidden = false;
@@ -297,8 +297,8 @@
     function joinSendNotification(formName) {
       if (joinNotified) return;
       joinNotified = true;
-      var actionEl = document.querySelector('[data-mailygo-action]');
-      var actionURL = actionEl ? actionEl.getAttribute('data-mailygo-action') : '';
+      var actionEl = document.querySelector('[data-relay-action]');
+      var actionURL = actionEl ? actionEl.getAttribute('data-relay-action') : '';
       if (!actionURL || actionURL === '#') return;
       var params = new URLSearchParams();
       params.append('_formName', formName);
@@ -308,7 +308,7 @@
       params.append('Sells locally', joinState.selling || '');
       if (joinState.stage2 !== null) params.append('Interested in Stage 2', joinState.stage2);
       params.append('timestamp', new Date().toISOString());
-      fetch(actionURL, { method: 'POST', body: params }).catch(function() {});
+      fetch(actionURL, { method: 'POST', body: params, redirect: 'manual' }).catch(function() {});
     }
 
     function joinTransition(currentScreen, answer) {
@@ -372,7 +372,7 @@
     document.querySelectorAll('.join-newsletter').forEach(function(form) {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
-        var honeypot = this.querySelector('[name="_t_email"]');
+        var honeypot = this.querySelector('[name="_hp"]');
         if (honeypot && honeypot.value) return;
         var emailInput = this.querySelector('[name="email"]');
         var email = emailInput ? emailInput.value.trim() : '';
@@ -383,7 +383,7 @@
         if (subEmail) subEmail.value = email;
         var params = new URLSearchParams(new FormData(this));
         params.append('timestamp', new Date().toISOString());
-        fetch(this.action, { method: 'POST', body: params }).catch(function() {});
+        fetch(this.action, { method: 'POST', body: params, redirect: 'manual' }).catch(function() {});
         this.style.display = 'none';
         var success = this.parentElement.querySelector('.join-newsletter__success');
         if (success) success.hidden = false;
@@ -395,7 +395,7 @@
   document.querySelectorAll('[data-form]').forEach(function(form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      var honeypot = this.querySelector('[name="_t_email"]');
+      var honeypot = this.querySelector('[name="_hp"]');
       if (honeypot && honeypot.value) return;
       var emailInput = this.querySelector('[name="email"]');
       var email = emailInput ? emailInput.value.trim() : '';
@@ -413,7 +413,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending\u2026';
       }
-      fetch(this.action, { method: 'POST', body: params })
+      fetch(this.action, { method: 'POST', body: params, redirect: 'manual' })
         .then(function() {
           form.style.display = 'none';
           var desc = form.parentElement.querySelector('.form-page__description');
@@ -430,42 +430,6 @@
         });
     });
   });
-
-  // Lead magnet form — MailyGo + Odoo CRM webhook
-  var leadForm = document.getElementById('lead-form');
-  if (leadForm) {
-    leadForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var honeypot = this.querySelector('[name="_t_email"]');
-      if (honeypot && honeypot.value) return;
-      var emailInput = this.querySelector('[name="email"]');
-      var email = emailInput ? emailInput.value.trim() : '';
-      if (!email || !email.includes('@')) return;
-
-      var replyTo = this.querySelector('[name="_replyTo"]');
-      if (replyTo) replyTo.value = email;
-
-      var submitBtn = this.querySelector('[type="submit"]');
-      if (submitBtn) { submitBtn.disabled = true; }
-
-      var params = new URLSearchParams(new FormData(this));
-      params.append('timestamp', new Date().toISOString());
-
-      // Send to MailyGo and Odoo in parallel
-      Promise.allSettled([
-        fetch(this.action, { method: 'POST', body: params }),
-        fetch('/.netlify/functions/submit-to-crm', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email })
-        })
-      ]).then(function() {
-        leadForm.style.display = 'none';
-        var success = document.getElementById('lead-success');
-        if (success) success.hidden = false;
-      });
-    });
-  }
 
   // Footer year
   var yearEl = document.getElementById('footer-year');

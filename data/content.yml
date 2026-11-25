@@ -184,7 +184,7 @@ lead_magnet:
 join:
   heading: "Join Local Loop"
   platformURL: "https://app.localloop-merseyside.co.uk/"
-  newsletterAction: "https://mailygo-production.up.railway.app/"
+  newsletterAction: "https://mail-relay-production.up.railway.app/form/llm-growth-partner-contact"
   welcome:
     text: "To validate your business for membership of the Local Loop Clearing Club, we just need to check a few things. A short sequence of questions with yes-no answers will very quickly get you to a result."
     ctaText: "Begin"
@@ -213,7 +213,7 @@ join:
 contact:
   heading: "Get In Touch"
   description: "Whether you have a question about Local Loop, want to explore how membership could benefit your business, or just want to say hello — we'd love to hear from you."
-  formAction: "https://mailygo-production.up.railway.app/"
+  formAction: "https://mail-relay-production.up.railway.app/form/llm-growth-partner-contact"
   fields:
     - name: "name"
       label: "Your Name"
@@ -254,7 +254,7 @@ enquire:
       - "Your business identified as a Founding Member on the Local Loop website."
       - "PR support on other activity, where practical."
       - "If you join the paid tier, your first year's membership is free."
-  formAction: "https://mailygo-production.up.railway.app/"
+  formAction: "https://mail-relay-production.up.railway.app/form/llm-growth-partner-contact"
   fields:
     - name: "businessName"
       label: "Business Name"

@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="error-page">
+  <div class="error-page__content">
+    <h1 class="error-page__title">{{ .Params.heading }}</h1>
+    <p class="error-page__text">{{ .Params.text }}</p>
+    <a href="/" class="btn btn--hero btn--lg">Back to Home</a>
+  </div>
+</div>
+{{ end }}
