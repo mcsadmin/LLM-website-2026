@@ -34,7 +34,8 @@
 
   <link rel="stylesheet" href="/css/main.css?v={{ substr (os.ReadFile "static/css/main.css" | md5) 0 8 }}">
 
-  <script defer data-domain="localloop-merseyside.co.uk" src="https://plausible.commoner.services/js/script.js"></script>
+  <script defer data-domain="localloop-merseyside.co.uk" src="https://plausible.commoner.services/js/script.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </head>
 <body class="antialiased">
   {{ block "main" . }}{{ end }}

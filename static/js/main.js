@@ -1,6 +1,13 @@
 (function() {
   'use strict';
 
+  // Plausible custom events. Never pass anything a visitor typed.
+  function track(name, props) {
+    if (typeof window.plausible === 'function') {
+      window.plausible(name, props ? { props: props } : undefined);
+    }
+  }
+
   // Footer email obfuscation
   (function() {
     var u = 'hello';
@@ -288,6 +295,7 @@
         joinState.inArea = answer;
         if (answer === 'no') {
           joinShowScreen('outOfArea');
+          track('Join check completed', { result: 'out-of-area' });
         } else {
           joinShowScreen('buying');
         }
@@ -299,20 +307,24 @@
         if (joinState.buying === 'yes' && answer === 'yes') {
           joinShowScreen('wonderful');
           joinSendNotification('join-direct-fit');
+          track('Join check completed', { result: 'direct-fit' });
         } else if (joinState.buying === 'yes' && answer === 'no') {
           joinShowScreen('stage2');
         } else if (joinState.buying === 'no' && answer === 'yes') {
           joinShowScreen('stage2');
         } else {
           joinShowScreen('additionalQs');
+          track('Join check completed', { result: 'not-a-fit' });
         }
       } else if (currentScreen === 'stage2') {
         joinState.stage2 = answer;
         if (answer === 'yes') {
           joinShowScreen('wonderful');
           joinSendNotification('join-stage2-fit');
+          track('Join check completed', { result: 'stage-2' });
         } else {
           joinShowScreen('additionalQs');
+          track('Join check completed', { result: 'not-a-fit' });
         }
       }
     }
@@ -356,6 +368,8 @@
         var params = new URLSearchParams(new FormData(this));
         params.append('timestamp', new Date().toISOString());
         fetch(this.action, { method: 'POST', body: params, redirect: 'manual' }).catch(function() {});
+        var sourceEl = this.querySelector('[name="source"]');
+        track('Newsletter signup', { source: sourceEl ? sourceEl.value : 'unknown' });
         this.style.display = 'none';
         var success = this.parentElement.querySelector('.join-newsletter__success');
         if (success) success.hidden = false;
@@ -385,6 +399,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending\u2026';
       }
+      if (form.getAttribute('data-form') === 'contact') track('Contact form sent');
       fetch(this.action, { method: 'POST', body: params, redirect: 'manual' })
         .then(function() {
           form.style.display = 'none';
