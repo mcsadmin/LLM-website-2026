@@ -1563,3 +1563,7 @@ h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: hsl(var(--primary));
 }
+
+/* Embedded Odoo guide form (support.localloop-merseyside.co.uk/llm-guide-form) */
+.lead-magnet__iframe { display: block; width: 100%; max-width: 560px; height: 132px; margin: 0 auto; border: 0; }
+@media (min-width: 640px) { .lead-magnet__iframe { height: 72px; } }
