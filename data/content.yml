@@ -176,9 +176,7 @@ lead_magnet:
   heading: "Getting Paid on Time"
   subheadingItalic: "— and what to do if you're not —"
   description: "From getting yourself set up, to communicating effectively with your customers, to problem solving for the tough cases. With expert advice, straightforward examples and links to resources, this guide will give you the tools, the understanding, and the mindset to help get you paid on time — and minimise the damage when payments do come in late."
-  formPlaceholder: "Enter your business email"
-  formButtonText: "Get the Guide"
-  successMessage: "Thanks! Check your email for the guide."
+  formEmbed: "https://support.localloop-merseyside.co.uk/llm-guide-form"
   privacyText: "We respect your privacy. Unsubscribe at any time."
 
 join:
@@ -254,35 +252,7 @@ enquire:
       - "Your business identified as a Founding Member on the Local Loop website."
       - "PR support on other activity, where practical."
       - "If you join the paid tier, your first year's membership is free."
-  formAction: "https://mail-relay-production.up.railway.app/form/llm-growth-partner-contact"
-  fields:
-    - name: "businessName"
-      label: "Business Name"
-      type: "text"
-      placeholder: "Your business name"
-      required: true
-    - name: "contactName"
-      label: "Contact Name"
-      type: "text"
-      placeholder: "Full name"
-      required: true
-    - name: "email"
-      label: "Email Address"
-      type: "email"
-      placeholder: "you@yourbusiness.co.uk"
-      required: true
-    - name: "phone"
-      label: "Phone (optional)"
-      type: "tel"
-      placeholder: "07xxx xxx xxx"
-      required: false
-    - name: "message"
-      label: "Tell us about your business"
-      type: "textarea"
-      placeholder: "What does your business do? Why are you interested in Local Loop?"
-      required: false
-  ctaText: "Submit Enquiry"
-  successMessage: "Thanks for your interest! We'll be in touch shortly to discuss Founding Membership."
+  formEmbed: "https://support.localloop-merseyside.co.uk/llm-enquire-form"
 
 footer:
   logo: "/images/logo-green-merseyside.svg"

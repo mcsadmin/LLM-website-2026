@@ -44,40 +44,7 @@
         </ul>
       </div>
 
-      <form class="form-page__form" action="{{ $pg.formAction }}" method="POST" data-form="enquire">
-        <input type="text" name="_hp" class="join-newsletter__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <input type="hidden" name="_formName" value="founding-membership-enquiry">
-        <input type="hidden" name="_replyTo" value="">
-        <input type="hidden" name="timestamp" value="">
-
-        {{ range $pg.fields }}
-        <div class="form-page__field">
-          <label class="form-page__label" for="field-{{ .name }}">{{ .label }}</label>
-          {{ if eq .type "textarea" }}
-          <textarea class="form-page__input form-page__textarea" id="field-{{ .name }}" name="{{ .name }}" placeholder="{{ .placeholder }}" {{ if .required }}required{{ end }} rows="5"></textarea>
-          {{ else }}
-          <input class="form-page__input" type="{{ .type }}" id="field-{{ .name }}" name="{{ .name }}" placeholder="{{ .placeholder }}" {{ if .required }}required{{ end }}>
-          {{ end }}
-        </div>
-        {{ end }}
-
-        <div class="form-page__actions">
-          <button type="submit" class="btn btn--green btn--lg">
-            {{ $pg.ctaText }}
-            <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
-        </div>
-      </form>
-
-      <div class="form-page__success" hidden>
-        <div class="join-result__icon join-result__icon--good">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <p class="join-screen__text">{{ $pg.successMessage }}</p>
-        <div class="join-screen__actions">
-          <a href="/" class="btn btn--outline-pill btn--sm">Back to Home</a>
-        </div>
-      </div>
+      <iframe class="form-page__iframe" src="{{ $pg.formEmbed }}" title="Founding membership enquiry form" loading="lazy" style="width:100%;height:760px;border:0;"></iframe>
     </div>
   </div>
 </main>

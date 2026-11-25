@@ -153,34 +153,6 @@
     });
   }
 
-  // Lead magnet form with honeypot
-  var leadForm = document.getElementById('lead-form');
-  var leadSuccess = document.getElementById('lead-success');
-
-  if (leadForm) {
-    leadForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      var honeypot = this.querySelector('[name="_hp"]');
-      if (honeypot && honeypot.value) return;
-
-      var emailInput = document.getElementById('lead-email');
-      var email = emailInput ? emailInput.value.trim() : '';
-      if (!email || !email.includes('@')) return;
-
-      var replyTo = this.querySelector('[name="_replyTo"]');
-      if (replyTo) replyTo.value = email;
-
-      var params = new URLSearchParams(new FormData(this));
-      params.append('timestamp', new Date().toISOString());
-      fetch(this.action, { method: 'POST', body: params, redirect: 'manual' }).catch(function() {});
-
-      leadForm.style.display = 'none';
-      leadSuccess.hidden = false;
-      showToast('Thanks! Check your email for the guide.');
-    });
-  }
-
   // Marquee random start + pause/play
   var marqueeTrack = document.querySelector('.marquee__track');
   if (marqueeTrack) {
