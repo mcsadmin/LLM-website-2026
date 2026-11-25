@@ -32,12 +32,12 @@
 
   {{ hugo.Generator }}
 
-  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/main.css?v={{ substr (os.ReadFile "static/css/main.css" | md5) 0 8 }}">
 
   <script defer data-domain="localloop-merseyside.co.uk" src="https://plausible.commoner.services/js/script.js"></script>
 </head>
 <body class="antialiased">
   {{ block "main" . }}{{ end }}
-  <script src="/js/main.js" defer></script>
+  <script src="/js/main.js?v={{ substr (os.ReadFile "static/js/main.js" | md5) 0 8 }}" defer></script>
 </body>
 </html>
